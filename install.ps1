@@ -24,3 +24,4 @@ New-Item -Type SymbolicLink -Path ~/.gitconfig -Value $(Join-Path $PSScriptRoot 
 
 # posh modules
 Install-Module posh-git
+Install-Module windows-screenfetch
