@@ -4,6 +4,7 @@ let g:windows=has('win32') || has('win64')
 
 if g:windows
     behave mswin
+    set runtimepath+=~/.vim
     set clipboard=unnamed
     set shell=powershell
     set shellcmdflag=-command
@@ -42,7 +43,7 @@ set expandtab
 set colorcolumn=80,120
 
 " plugins
-call plug#begin('~/vimfiles/plugged')
+call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jreybert/vimagit'

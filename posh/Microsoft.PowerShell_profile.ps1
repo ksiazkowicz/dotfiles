@@ -101,10 +101,7 @@ function Sync-SSH
     chmod 644 ~/.ssh/*
 }
 
-# make sure git uses vim
-if (!($PSVersionTable.Platform -like "unix")) {
-    git config --global core.editor "C:\\\\Program\ Files\ \(x86\)\\\\Vim\\\\vim80\\\\vim.exe"
-} else {
+if ($PSVersionTable.Platform -like "unix") {
     # docker toolbox on WSL
     new-alias "docker-machine" "docker-machine.exe"
     
