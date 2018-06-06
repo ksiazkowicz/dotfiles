@@ -2,6 +2,7 @@
 $env:WORKON_HOME = Join-Path $HOME "Envs"
 $env:PYTHONIOENCODING = "UTF-8"
 $env:VIRTUAL_ENV_DISABLE_PROMPT = "TRUE"
+$env:GIT_SSH = $(get-command ssh).Source
 
 # New-Alias python3 "C:\Users\janis\AppData\Local\Programs\Python\Python36\python.exe"
 
@@ -110,4 +111,12 @@ if ($PSVersionTable.Platform -like "unix") {
     ./start.sh exit > /dev/null
     popd > /dev/null
     cd $($pwd.Path | sed 's/\/mnt\/c\//\/c\//')
+}
+
+if ($env:USE_VENV) {
+    workon $env:USE_VENV;
+}
+
+if ($env:USE_DOCKERMACHINE) {
+    docker-env $env:USE_DOCKERMACHINE;
 }
