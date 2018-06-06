@@ -1,6 +1,7 @@
 set nocompatible
 
 let g:windows=has('win32') || has('win64')
+let g:haiku=has('haiku') || has('beos')
 
 if g:windows
     behave mswin
@@ -8,6 +9,10 @@ if g:windows
     set clipboard=unnamed
     set shell=powershell
     set shellcmdflag=-command
+endif
+
+if g:haiku
+    set runtimepath+=~/.vim
 endif
 
 if g:windows && !has('gui_running')
