@@ -3,8 +3,7 @@ $env:WORKON_HOME = Join-Path $HOME "Envs"
 $env:PYTHONIOENCODING = "UTF-8"
 $env:VIRTUAL_ENV_DISABLE_PROMPT = "TRUE"
 $env:GIT_SSH = $(get-command ssh).Source
-
-# New-Alias python3 "C:\Users\janis\AppData\Local\Programs\Python\Python36\python.exe"
+$env:DOCKER_DEFAULT_PLATFORM = "linux"
 
 $env:SCRIPTS_PATH = (get-item $profile).Directory
 
@@ -87,6 +86,11 @@ function Invoke-BatchFile
     }
 
     Remove-Item $tempFile
+}
+
+function Fix-RecycleBin
+{
+    rm -r -fo C:\`$Recycle.bin
 }
 
 function Import-VS2015
