@@ -52,3 +52,14 @@ function docker-recompose {
 function Generate-DjangoSecretKey {
     python manage.py shell -c "from django.core.management import utils; print(utils.get_random_secret_key())"
 }
+
+function Fix-RecycleBin
+{
+    Remove-Item -r -Force C:\`$Recycle.bin
+}
+
+function Sync-SSH
+{
+    cp -R /mnt/c/Users/Maciej/.ssh ~/
+    chmod 644 ~/.ssh/*
+}

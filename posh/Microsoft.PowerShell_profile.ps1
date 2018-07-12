@@ -13,45 +13,17 @@ $env:SCRIPTS_PATH = (get-item $profile).Directory
 Import-Module posh-git
 Import-Module virtualenvwrapper
 
-# env variables for lunix
-if ($PSVersionTable.Platform -like "Unix") {
-    $global:VIRTUALENVWRAPPER_PYTHON = @(which python3)[0].definition
-    $global:VIRTUALENVWRAPPER_VIRTUALENV = "virtualenv"
-}
-
 # aliases
 New-Alias which get-command
 
 # prompt
-function prompt_old {
-    write-host "$env:UserName@$env:ComputerName " -foreground green -n
-    write-host ((pwd).Path) -foreground yellow
-    write-host ">" -foreground gray -n
-    return ' '
-}
-
-function global:set-ConsolePosition ([int]$x) { 
-    # Get current cursor position and store away 
-    $position=$host.ui.rawui.cursorposition 
-    
-    if ($x -le 0) {
-        $x = $host.UI.RawUI.MaxWindowSize.Width + $x;
-    }
-
-    # Store new X Co-ordinate away 
-    $position.x=$x 
-    # Place modified location back to $HOST 
-    $host.ui.rawui.cursorposition=$position 
-}
-
 function prompt {
     $script:last = $?;
     $script:first = $true;
 
     Write-PromptStatus
-    #Write-PromptUser
     Write-PromptVirtualEnv
-    Write-PromptDir 
+    Write-PromptDir
     Write-PromptGit
     Write-PromptDockerMachine
 
@@ -88,33 +60,27 @@ function Invoke-BatchFile
     Remove-Item $tempFile
 }
 
-function Fix-RecycleBin
-{
-    rm -r -fo C:\`$Recycle.bin
-}
-
-function Import-VS2015
-{
-    Invoke-BatchFile "${env:VS140COMNTOOLS}vsvars32.bat" $vcargs
-     #VCVARS invoke in VS2012 are silent...
-    Write-Host "VS2015 vcvars loaded..."
-}
-
-function Sync-SSH
-{
-    cp -R /mnt/c/Users/Maciej/.ssh ~/
-    chmod 644 ~/.ssh/*
-}
 
 if ($PSVersionTable.Platform -like "unix") {
-    # docker toolbox on WSL
-    new-alias "docker-machine" "docker-machine.exe"
-    
-    $env:VBOX_MSI_INSTALL_PATH='/c/Program Files/Oracle/VirtualBox/'
-    pushd '/c/Program Files/Docker Toolbox' > /dev/null
-    ./start.sh exit > /dev/null
-    popd > /dev/null
-    cd $($pwd.Path | sed 's/\/mnt\/c\//\/c\//')
+    # venv on lunix
+    $global:VIRTUALENVWRAPPER_PYTHON = @(which python3)[0].definition
+    $global:VIRTUALENVWRAPPER_VIRTUALENV = "virtualenv"
+
+    # check if WSL
+    if (Test-Path "/mnt/c/WINDOWS" -PathType Container) {
+        $global:IS_WSL = $true;
+
+        # Docker Toolbox on WSL
+        if ($false -and (Test-Path "/mnt/c/Program Files/Docker Toolbox" -PathType Container)) {
+            new-alias "docker-machine" "docker-machine.exe"
+
+            $env:VBOX_MSI_INSTALL_PATH='/c/Program Files/Oracle/VirtualBox/'
+            Push-Location '/c/Program Files/Docker Toolbox' > /dev/null
+            ./start.sh exit > /dev/null
+            Pop-Location > /dev/null
+            Set-Location $($pwd.Path | sed 's/\/mnt\/c\//\/c\//')
+        }
+    }
 }
 
 if ($env:USE_VENV) {
