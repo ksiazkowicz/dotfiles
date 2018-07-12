@@ -4,3 +4,5 @@
 
 [core]
 	editor = C:\\\\\\\\Program\\ Files\\ \\(x86\\)\\\\\\\\Vim\\\\\\\\vim81\\\\\\\\gvim.exe
+	autocrlf = false
+	eol = lf
