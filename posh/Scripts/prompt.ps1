@@ -67,7 +67,7 @@ function Get-GitBranch {
 }
 
 function Write-PromptStatus {
-    if ($script:last -or ($lastexitcode -eq 0)) {
+    if ($script:last) {
         Write-PromptSegment ' ✔  ' Black Green
     } else {
         Write-PromptSegment " ✖  $lastexitcode " Black Red

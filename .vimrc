@@ -58,7 +58,11 @@ call plug#end()
 
 " gvim settings
 if has('gui_running')
-    set guifont=Source_Code_Pro_for_Powerline:h9:cANSI:qDRAFT
+    if g:windows
+        set guifont=Source_Code_Pro_for_Powerline:h9:cANSI:qDRAFT
+    else
+        set guifont=Source\ Code\ Pro\ 11
+    endif
     set guioptions -=m
     set guioptions -=T
 endif

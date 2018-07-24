@@ -11,7 +11,7 @@ $env:SCRIPTS_PATH = (get-item $profile).Directory
 . "$env:SCRIPTS_PATH\Scripts\prompt.ps1"
 . "$env:SCRIPTS_PATH\Scripts\helpers.ps1"
 Import-Module posh-git
-Import-Module virtualenvwrapper
+Import-Module VirtualEnvWrapper
 
 # aliases
 New-Alias which get-command
@@ -69,6 +69,11 @@ if ($PSVersionTable.Platform -like "unix") {
     # check if WSL
     if (Test-Path "/mnt/c/WINDOWS" -PathType Container) {
         $global:IS_WSL = $true;
+
+        # enable X11 under WSL
+        $env:DISPLAY=":0.0"
+        $env:LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGL.so"
+        $env:LIBGL_ALWAYS_INDIRECT="1"
 
         # Docker Toolbox on WSL
         if ($false -and (Test-Path "/mnt/c/Program Files/Docker Toolbox" -PathType Container)) {
