@@ -22,6 +22,7 @@ $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 New-Item -Type SymbolicLink -Path ~/.vimrc -Value $(Join-Path $PSScriptRoot .vimrc)
 New-Item -Type SymbolicLink -Path ~/.gitconfig -Value $(Join-Path $PSScriptRoot .gitconfig_win)
 New-Item -Type SymbolicLink -Path ~/.gitattributes -Value $(Join-Path $PSScriptRoot .gitattributes)
+New-Item -Type SymbolicLink -Path ~/AppData/Roaming/ConEmu.xml -Value $(Join-Path $PSScriptRoot ConEmu.xml)
 
 # posh modules
 Install-Module posh-git
