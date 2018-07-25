@@ -20,8 +20,10 @@ function docker-env {
     }
 }
 
-$old_dc = get-command docker-compose
-New-Alias docker-compose-old $old_dc
+if (Get-Command docker-compose -errorAction SilentlyContinue) {
+    $old_dc = get-command docker-compose
+    New-Alias docker-compose-old $old_dc
+}
 
 function docker-compose {
     reset-encoding

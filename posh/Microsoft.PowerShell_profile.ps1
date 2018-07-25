@@ -11,7 +11,10 @@ $env:SCRIPTS_PATH = (get-item $profile).Directory
 . "$env:SCRIPTS_PATH\Scripts\prompt.ps1"
 . "$env:SCRIPTS_PATH\Scripts\helpers.ps1"
 Import-Module posh-git
-Import-Module VirtualEnvWrapper
+
+if (Get-Command python -errorAction SilentlyContinue) {
+    Import-Module VirtualEnvWrapper
+}
 
 # aliases
 New-Alias which get-command
