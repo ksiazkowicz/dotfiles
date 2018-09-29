@@ -129,3 +129,4 @@ if [ -d /mnt/c/WINDOWS ]; then
     export LIBGL_ALWAYS_INDIRECT=1
 fi
 
+export PATH=$PATH:~/dotfiles/bash

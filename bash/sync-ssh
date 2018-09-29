@@ -1,0 +1,3 @@
+#!/bin/bash
+cp -R /mnt/c/Users/$USER/.ssh ~/
+chmod -R 700 ~/.ssh
