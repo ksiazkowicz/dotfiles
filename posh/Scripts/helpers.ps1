@@ -62,6 +62,6 @@ function Fix-RecycleBin
 
 function Sync-SSH
 {
-    cp -R /mnt/c/Users/Maciej/.ssh ~/
-    chmod 644 ~/.ssh/*
+    cp -R /mnt/c/Users/$env:UserName/.ssh ~/
+    chmod 700 ~/.ssh/*
 }
