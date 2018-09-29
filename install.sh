@@ -33,8 +33,12 @@ if [ -f ~/.bashrc ]; then
 fi
 ln -s $PWD/.gitconfig ~/.gitconfig
 
-# lunix posh config
 if [ $os != "Haiku" ]; then
+    # lunix vscode config
+    ln -s $PWD/vscode/settings.json ~/.config/Code/User/settings.json
+    ln -s $PWD/vscode/keybindings.json ~/.config/Code/User/keybindings.json
+
+    # lunix posh config
     if [ -d ~/.config/powershell ]; then
         rm -rf ~/.config/powershell
     fi
