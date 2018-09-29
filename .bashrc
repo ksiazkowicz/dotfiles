@@ -116,6 +116,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Fix PATH env variable under WSL
+if [ -d /mnt/c/WINDOWS ]; then
+    export PATH="/home/$USER/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+fi
+
 # virtualenvwrapper
 export WORKON_HOME=$HOME/Envs
 export PROJECT_HOME=$HOME/devel
