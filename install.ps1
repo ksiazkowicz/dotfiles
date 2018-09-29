@@ -23,6 +23,8 @@ New-Item -Type SymbolicLink -Path ~/.vimrc -Value $(Join-Path $PSScriptRoot .vim
 New-Item -Type SymbolicLink -Path ~/.gitconfig -Value $(Join-Path $PSScriptRoot .gitconfig_win)
 New-Item -Type SymbolicLink -Path ~/.gitattributes -Value $(Join-Path $PSScriptRoot .gitattributes)
 New-Item -Type SymbolicLink -Path ~/AppData/Roaming/ConEmu.xml -Value $(Join-Path $PSScriptRoot ConEmu.xml)
+New-Item -Type SymbolicLink -Path ~/AppData/Roaming/Code/User/settings.json -Value $(Join-Path $PSScriptRoot vscode/settings.json)
+New-Item -Type SymbolicLink -Path ~/AppData/Roaming/Code/User/keybindings.json -Value $(Join-Path $PSScriptRoot vscode/keybindings.json)
 
 # posh modules
 Install-Module posh-git
