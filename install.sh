@@ -1,10 +1,10 @@
 #!/bin/sh
 # check which OS we're running on first
 os=`uname -o`
-vimrc='~/.vimrc'
+vimrc=$HOME/.vimrc
 
 if [ $os = "Haiku" ]; then
-    vimrc='~/.vim/vimrc'
+    vimrc=$HOME/.vim/vimrc
 fi
 
 # copy vimfiles
