@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2018-07-25 23:16:27" build="180626">
+		<key name=".Vanilla" modified="2018-09-25 11:00:06" build="180626">
 			<value name="Language" type="string" data="en"/>
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
@@ -82,13 +82,13 @@
 			<value name="JumpListAutoUpdate" type="hex" data="01"/>
 			<value name="SaveCmdHistory" type="hex" data="01"/>
 			<value name="CmdLineHistory" type="multi">
-				<line data="{Bash::Debian}"/>
-				<line data="{Shells::PowerShell}"/>
 				<line data="{Shells::PowerShell (Admin)}"/>
 				<line data="{Bash::bash}"/>
+				<line data="{Bash::WSL}"/>
+				<line data="{Bash::Debian}"/>
+				<line data="{Shells::PowerShell}"/>
 				<line data='"gvim.exe"'/>
 				<line data="{Shells::cmd (Admin)}"/>
-				<line data="{Bash::WSL}"/>
 				<line data="{Tests::Show ANSI colors}"/>
 				<line data="{SDK::VS 15.0 x64 tools prompt}"/>
 				<line data="{Tools::Docker}"/>
@@ -158,12 +158,12 @@
 			<value name="AutoSaveSizePos" type="hex" data="01"/>
 			<value name="Cascaded" type="hex" data="01"/>
 			<value name="IntegralSize" type="hex" data="00"/>
-			<value name="WindowMode" type="dword" data="0000051f"/>
-			<value name="ConWnd X" type="long" data="2985"/>
-			<value name="ConWnd Y" type="long" data="75"/>
+			<value name="WindowMode" type="dword" data="00000520"/>
+			<value name="ConWnd X" type="long" data="3485"/>
+			<value name="ConWnd Y" type="long" data="-20"/>
 			<value name="LastMonitor" type="string" data="2736,0,4656,1050"/>
-			<value name="ConWnd Width" type="dword" data="000000b8"/>
-			<value name="ConWnd Height" type="dword" data="00000032"/>
+			<value name="ConWnd Width" type="dword" data="00000156"/>
+			<value name="ConWnd Height" type="dword" data="0000005e"/>
 			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="QuakeStyle" type="hex" data="00"/>
 			<value name="Restore2ActiveMon" type="hex" data="00"/>
@@ -606,8 +606,8 @@
 				<value name="DndRKey" type="hex" data="A2"/>
 				<value name="WndDragKey" type="dword" data="00121101"/>
 			</key>
-			<key name="Tasks" modified="2018-07-25 18:22:10" build="180626">
-				<value name="Count" type="long" data="20"/>
+			<key name="Tasks" modified="2018-07-30 15:05:19" build="180626">
+				<value name="Count" type="long" data="19"/>
 				<key name="Task1" modified="2018-07-25 18:22:10" build="180626">
 					<value name="Name" type="string" data="{Shells::cmd}"/>
 					<value name="Flags" type="dword" data="00000000"/>
@@ -699,43 +699,34 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data='*cmd.exe /k Title Chocolatey &amp; "%ConEmuBaseDir%\Addons\ChocolateyAbout.cmd"'/>
 				</key>
-				<key name="Task11" modified="2018-07-25 18:22:10" build="180626">
+				<key name="Task11" modified="2018-09-20 23:24:20" build="180626">
 					<value name="Name" type="string" data="{Bash::bash}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data='-icon "%ProgramW6432%\WindowsApps\CanonicalGroupLimited.UbuntuonWindows_1604.2017.922.0_x64__79rhkp1fndgsc\images\icon.ico"'/>
+					<value name="GuiArgs" type="string" data=""/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data='set "PATH=%ConEmuBaseDirShort%\wsl;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-cyg-64.exe --wsl -cur_console:pm:/mnt'/>
 				</key>
-				<key name="Task12" modified="2018-07-25 18:22:10" build="180626">
-					<value name="Name" type="string" data="{Bash::Debian}"/>
-					<value name="Flags" type="dword" data="00000004"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data='-icon "%ProgramW6432%\WindowsApps\TheDebianProject.DebianGNULinux_76v4gfsz19hv4\images\icon.ico"'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='set "PATH=%ConEmuBaseDirShort%\wsl;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-cyg-64.exe --wsl --distro-guid={726d0f48-a064-4808-9123-17a10be29024} -cur_console:pm:/mnt'/>
-				</key>
-				<key name="Task13" modified="2018-07-25 18:22:10" build="180626">
+				<key name="Task12" modified="2018-07-30 15:05:19" build="180626">
 					<value name="Name" type="string" data="{Bash::Msys2-64}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='set CHERE_INVOKING=1 &amp; set "PATH=%ConEmuDrive%\msys64\usr\bin;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-msys2-64.exe -new_console:p %ConEmuDrive%\msys64\usr\bin\bash.exe --login -i -new_console:C:"%ConEmuDrive%\msys64\msys2.ico"'/>
+					<value name="Cmd1" type="string" data='set CHERE_INVOKING=1 &amp; set "PATH=%ConEmuDrive%\bin\msys64\usr\bin;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-msys2-64.exe -new_console:p %ConEmuDrive%\bin\msys64\usr\bin\bash.exe --login -i -new_console:C:"%ConEmuDrive%\bin\msys64\msys2.ico"'/>
 				</key>
-				<key name="Task14" modified="2018-07-25 18:22:10" build="180626">
+				<key name="Task13" modified="2018-07-30 15:05:19" build="180626">
 					<value name="Name" type="string" data="{SDK::VS 14.0 x86 tools prompt}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='cmd /k ""%ConEmuDrive%\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"" x86 -new_console:t:"VS 14.0" -new_console:C:"%CommonProgramFiles(x86)%\microsoft shared\MSEnv\VSFileHandler.dll,33"'/>
+					<value name="Cmd1" type="string" data='cmd /k ""%ConEmuDrive%\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"" x86 -new_console:t:"VS 14.0"'/>
 				</key>
-				<key name="Task15" modified="2018-07-25 18:22:10" build="180626">
+				<key name="Task14" modified="2018-07-30 15:05:19" build="180626">
 					<value name="Name" type="string" data="{SDK::VS 15.0 x86 tools prompt}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -744,16 +735,16 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data='cmd /k ""%ConEmuDrive%\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat"" x86 -new_console:t:"VS 15.0" -new_console:C:"%CommonProgramFiles(x86)%\microsoft shared\MSEnv\VSFileHandler.dll,38"'/>
 				</key>
-				<key name="Task16" modified="2018-07-25 18:22:10" build="180626">
+				<key name="Task15" modified="2018-07-30 15:05:19" build="180626">
 					<value name="Name" type="string" data="{SDK::VS 14.0 x64 tools prompt}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='cmd /k ""%ConEmuDrive%\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"" x64 -new_console:t:"VS 14.0" -new_console:C:"%CommonProgramFiles(x86)%\microsoft shared\MSEnv\VSFileHandler.dll,33"'/>
+					<value name="Cmd1" type="string" data='cmd /k ""%ConEmuDrive%\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"" x64 -new_console:t:"VS 14.0"'/>
 				</key>
-				<key name="Task17" modified="2018-07-25 18:22:10" build="180626">
+				<key name="Task16" modified="2018-07-30 15:05:19" build="180626">
 					<value name="Name" type="string" data="{SDK::VS 15.0 x64 tools prompt}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -762,7 +753,7 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data='cmd /k ""%ConEmuDrive%\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat"" x64 -new_console:t:"VS 15.0" -new_console:C:"%CommonProgramFiles(x86)%\microsoft shared\MSEnv\VSFileHandler.dll,38"'/>
 				</key>
-				<key name="Task18" modified="2018-07-25 18:22:10" build="180626">
+				<key name="Task17" modified="2018-07-30 15:05:19" build="180626">
 					<value name="Name" type="string" data="{Tools::Docker}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -771,7 +762,7 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data='"%DOCKER_TOOLBOX_INSTALL_PATH%\..\Git\usr\bin\bash.exe"-l -i "%DOCKER_TOOLBOX_INSTALL_PATH%\start.sh" -new_console:t:"Docker"'/>
 				</key>
-				<key name="Task19" modified="2018-07-25 18:22:10" build="180626">
+				<key name="Task18" modified="2018-07-30 15:05:19" build="180626">
 					<value name="Name" type="string" data="{Editors::gvim}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -780,7 +771,7 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data="gvim --windowid !ConEmuBackHWND! -new_console:sH"/>
 				</key>
-				<key name="Task20" modified="2018-07-25 18:22:10" build="180626">
+				<key name="Task19" modified="2018-07-30 15:05:19" build="180626">
 					<value name="Name" type="string" data="{Putty}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
