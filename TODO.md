@@ -1,0 +1,3 @@
+- Fix gvim settings on Haiku
+- Add hooks for virtualenvwrapper for Haiku - venv is broken by default, when you install a package, everything is put into "non-packaged" directory
+- Add fancy bash prompt
