@@ -1,14 +1,16 @@
 #!/bin/sh
-# Userland mode (~$USER/), (~/).
+# Based on this gist: 
+# https://gist.github.com/enzinier/8d00d3f37d2e23985dcfa65662d163fa
+# added Haiku support
 
-# ~/.fonts is now deprecated and that
-#FONT_HOME=~/.fonts
-# ~/.local/share/fonts should be used instead
+# set $FONT_HOME variable
 FONT_HOME=~/.local/share/fonts
+if [ $os = "Haiku" ]; then
+    FONT_HOME=/system/non-packaged/data/fonts
+fi
 
-echo "installing fonts at $PWD to $FONT_HOME"
+echo "installing fonts to $FONT_HOME"
 mkdir -p "$FONT_HOME/adobe-fonts/source-code-pro"
-# find "$FONT_HOME" -iname '*.ttf' -exec echo '{}' \;
 
 (git clone \
    --branch release \
