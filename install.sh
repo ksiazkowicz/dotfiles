@@ -23,12 +23,20 @@ fi
 ln -s $PWD/.vimrc $vimrc
 
 # symlinks
-if [ -f ~/.bashrc ]; then
-    rm -f ~/.bashrc
-fi
-ln -s $PWD/.bashrc ~/.bashrc
+bashrc_path=$PWD/.bashrc
+bashrc_dest=$HOME/.bashrc
 
-if [ -f ~/.bashrc ]; then
+if [ $os = "Haiku" ]; then
+    bashrc_path=$PWD/haiku_bashrc
+    bashrc_dest=$HOME/config/settings/profile
+fi
+
+if [ -f $bashrc_dest ]; then
+    rm -f $bashrc_dest
+fi
+ln -s $bashrc_path $bashrc_dest
+
+if [ -f ~/.gitconfig ]; then
     rm -f ~/.gitconfig
 fi
 ln -s $PWD/.gitconfig ~/.gitconfig

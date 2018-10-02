@@ -3,6 +3,8 @@
 # https://gist.github.com/enzinier/8d00d3f37d2e23985dcfa65662d163fa
 # added Haiku support
 
+os=`uname -o`
+
 # set $FONT_HOME variable
 FONT_HOME=~/.local/share/fonts
 if [ $os = "Haiku" ]; then
