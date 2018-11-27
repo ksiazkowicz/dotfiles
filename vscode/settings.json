@@ -1,17 +1,35 @@
 {
-    "editor.fontFamily": "Source Code Variable, Consolas, 'Courier New', monospace",
-    "terminal.integrated.fontFamily": "Source Code Variable",
-    // "terminal.integrated.experimentalTextureCachingStrategy": "dynamic",
-    "git.autofetch": true,
-    "python.venvPath": "~/Envs",
-    "window.zoomLevel": 0,
-    "window.titleBarStyle": "custom",
-    "docker.showExplorer": false,
-    "workbench.statusBar.feedback.visible": false,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "window.smoothScrollingWorkaround": true,
-    "files.eol": "\n",
-    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-    "breadcrumbs.enabled": true,
-    "python.jediEnabled": false
+  "editor.fontFamily": "Source Code Variable, Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "Source Code Variable",
+  "terminal.integrated.experimentalTextureCachingStrategy": "dynamic",
+  "git.autofetch": true,
+  "python.venvPath": "~/Envs",
+  "window.zoomLevel": 0,
+  "window.titleBarStyle": "custom",
+  "docker.showExplorer": false,
+  "workbench.statusBar.feedback.visible": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "window.smoothScrollingWorkaround": true,
+  "files.eol": "\n",
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+  "breadcrumbs.enabled": true,
+  "python.jediEnabled": false,
+  "gitlens.codeLens.enabled": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "vue",
+      "autoFix": true
+    },
+    {
+      "language": "vue-html",
+      "autoFix": true
+    }
+  ],
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "search.useGlobalIgnoreFiles": true,
+  "prettier.endOfLine": "lf",
+  "terminal.integrated.experimentalBufferImpl": "TypedArray",
+  "terminal.integrated.rendererType": "dom"
 }

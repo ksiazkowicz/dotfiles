@@ -11,6 +11,14 @@ function reset-encoding {
     [Console]::OutputEncoding = [System.Text.Encoding]::Default;
 }
 
+function Toggle-CaseSensitivity {
+    $PathRoot = $args[0];
+    $EnableCaseSensitivity = $args[1];
+    @(Get-ChildItem -Path $PathRoot -Recurse -Directory | Select-Object -ExpandProperty 'FullName') | ForEach-Object { 
+cmd /c ('fsutil.exe file SetCaseSensitiveInfo "{0}" {1}' -f ($_,$(if($EnableCaseSensitivity){'enable'}else{'disable'}))) 
+}
+}
+
 function docker-env {
     $a = $args[0];
     & docker-machine env $a --shell powershell | Invoke-Expression;
