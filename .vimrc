@@ -15,9 +15,11 @@ if g:haiku
     set runtimepath+=~/.vim
 endif
 
-if g:windows && !has('gui_running')
+if g:windows && !has('gui_running') && $ConEmuANSI == "ON"
     set term=xterm
     set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
 
     inoremap <Char-0x07F> <BS>
     nnoremap <Char-0x07F> <BS>
@@ -71,7 +73,12 @@ endif
 let g:airline_powerline_fonts = 1
 map <F7> mzgg=G`z
 let g:airline_theme="minimalist"
-colorscheme darcula
+
+if g:windows && !has('gui_running') && $ConEmuANSI != "ON"
+    colorscheme desert
+else
+    colorscheme darcula
+endif 
 
 " keyboard mappings
 inoremap <C-v> <ESC>"+pa
