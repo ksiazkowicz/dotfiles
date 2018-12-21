@@ -1,8 +1,48 @@
 // Place your key bindings in this file to overwrite the defaults
 [
-    {
-        "key": "ctrl+f7",
-        "command": "workbench.action.tasks.runTask",
-        "args": "Compile bro"
-    },
+  {
+    "key": "ctrl+f7",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Compile bro"
+  },
+  {
+    "key": "ctrl+alt+oem_1",
+    "command": "latex-workshop.clean",
+    "when": "editorTextFocus && !latex-workshop:altkeymap"
+  },
+  {
+    "key": "ctrl+alt+c",
+    "command": "-latex-workshop.clean",
+    "when": "editorTextFocus && !latex-workshop:altkeymap"
+  },
+  {
+    "key": "ctrl+alt+oem_7",
+    "command": "latex-workshop.clean",
+    "when": "editorTextFocus && latex-workshop:altkeymap"
+  },
+  {
+    "key": "ctrl+l alt+c",
+    "command": "-latex-workshop.clean",
+    "when": "editorTextFocus && latex-workshop:altkeymap"
+  },
+  {
+    "key": "ctrl+alt+oem_6",
+    "command": "workbench.view.extension.latex",
+    "when": "editorTextFocus && !latex-workshop:altkeymap"
+  },
+  {
+    "key": "ctrl+alt+x",
+    "command": "-workbench.view.extension.latex",
+    "when": "editorTextFocus && !latex-workshop:altkeymap"
+  },
+  {
+    "key": "alt+oem_6",
+    "command": "workbench.view.extension.latex",
+    "when": "editorTextFocus && latex-workshop:altkeymap"
+  },
+  {
+    "key": "ctrl+l alt+x",
+    "command": "-workbench.view.extension.latex",
+    "when": "editorTextFocus && latex-workshop:altkeymap"
+  }
 ]
