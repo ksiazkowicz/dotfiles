@@ -12,6 +12,8 @@ $env:SCRIPTS_PATH = (get-item $profile).Directory
 . "$env:SCRIPTS_PATH\Scripts\helpers.ps1"
 Import-Module posh-git
 
+function Switch-DefaultPython {}
+
 if (Get-Command python -errorAction SilentlyContinue) {
     Import-Module VirtualEnvWrapper
 }

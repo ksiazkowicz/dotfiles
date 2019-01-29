@@ -72,11 +72,6 @@ function Write-PromptStatus {
         if ($lastCommand) {
             $lastCommand = $lastCommand.CommandLine.split()[0]
         }
-        if ($lastCommand -like 'g++') {
-            $Song = New-Object System.Media.SoundPlayer
-            $Song.SoundLocation = "C:\Users\janis\erar.wav"
-            $Song.Play()
-        }
         Write-PromptSegment ' ✔  ' Black Green
     } else {
         Write-PromptSegment " ✖  $lastexitcode " Black Red
