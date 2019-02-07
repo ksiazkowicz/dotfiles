@@ -1,12 +1,10 @@
 {
   "editor.fontFamily": "Source Code Variable, Consolas, 'Courier New', monospace",
-  "terminal.integrated.fontFamily": "Source Code Variable",
   "git.autofetch": true,
   "python.venvPath": "~/Envs",
   "workbench.statusBar.feedback.visible": false,
   "diffEditor.ignoreTrimWhitespace": false,
   "files.eol": "\n",
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
   "breadcrumbs.enabled": true,
   "python.jediEnabled": false,
   "gitlens.codeLens.enabled": false,
@@ -29,5 +27,11 @@
   "prettier.endOfLine": "lf",
   "latex-workshop.view.pdf.viewer": "tab",
   "editor.rulers": [80, 120],
-  "workbench.settings.editor": "json"
+  "workbench.settings.editor": "json",
+  "window.zoomLevel": 0,
+
+  // Terminal
+  "terminal.integrated.fontFamily": "Source Code Variable",
+  "terminal.integrated.windowsEnableConpty": true,
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
 }
