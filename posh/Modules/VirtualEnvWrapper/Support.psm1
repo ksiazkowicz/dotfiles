@@ -90,7 +90,7 @@ filter LooksLikeAVirtualEnv
     param([IO.DirectoryInfo]$path)
 
     $_ | where-object { $_.PSIsContainer -and `
-                        (test-path (join-path $_.FullName "Scripts/activate.ps1"))
+                        (test-path (join-path $_.FullName "$global:VIRTUALENVWRAPPER_DIR/activate.ps1"))
                         }
 }
 
@@ -105,7 +105,7 @@ function NewVirtualEnvData
                     -name 'Name' -value { $this.PathInfo.Name }
     add-member -inputobject $info `
                     -membertype 'NoteProperty' `
-                    -name 'PathToScripts' -value (join-path $path.Fullname 'Scripts')
+                    -name 'PathToScripts' -value (join-path $path.Fullname "$global:VIRTUALENVWRAPPER_DIR")
     add-member -inputobject $info `
                     -membertype 'NoteProperty' `
                     -name 'PathToSitePackages' -value (join-path $path.Fullname 'Lib/site-packages')

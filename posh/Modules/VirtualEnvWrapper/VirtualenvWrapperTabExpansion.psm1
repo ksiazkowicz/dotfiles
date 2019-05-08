@@ -22,7 +22,7 @@ filter LetVirtualEnvsThru {
 #>
     $_ | where-object {
             $_.PSIsContainer -and `
-            (test-path (join-path $_.fullname 'Scripts/activate.ps1'))
+            (test-path (join-path $_.fullname "$global:VIRTUALENVWRAPPER_DIR/activate.ps1")) 
             }
 }
 
