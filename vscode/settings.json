@@ -34,11 +34,9 @@
   "terminal.integrated.fontFamily": "Source Code Variable",
   "terminal.integrated.windowsEnableConpty": true,
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-  "terminal.integrated.shell.osx": "/bin/bash",
+  "terminal.integrated.shell.osx": "/usr/local/bin/pwsh",
   "terminal.integrated.shellArgs.osx": [
-    "-l",
-    "-c",
-    "/usr/local/bin/pwsh"
+    "--nologo"
   ],
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
