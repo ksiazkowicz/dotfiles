@@ -31,7 +31,7 @@ function Write-PromptSegment {
         if ($script:hadBg -or $hasBg) {
             Write-Host  -NoNewline -BackgroundColor $Background -ForegroundColor $script:bg
         } else {
-            Write-Host  -NoNewLine -BackgroundColor $Background -ForegroundColor $script:fg
+            Write-Host  -NoNewLine -ForegroundColor $script:fg
         }
     } else {
         $script:first = $false;
@@ -39,7 +39,11 @@ function Write-PromptSegment {
 
     $script:hadBg = $hasBg
 
-    Write-Host $text -NoNewline -BackgroundColor $Background -ForegroundColor $Foreground
+    if ($hasBg) {
+        Write-Host $text -NoNewline -BackgroundColor $Background -ForegroundColor $Foreground
+    } else {
+        Write-Host $text -NoNewline -ForegroundColor $Foreground
+    }
 
     $script:bg = $Background;
     $script:fg = $Foreground;
