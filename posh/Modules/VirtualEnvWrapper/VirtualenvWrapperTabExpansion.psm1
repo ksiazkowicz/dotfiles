@@ -9,7 +9,7 @@
 #==============================================================================
 # Ensure the old environment is restored when we exit. (Based on PowerTab.)
 #------------------------------------------------------------------------------
-$_oldTabExpansion = Get-Content Function:TabExpansion2
+$_oldTabExpansion = Get-Content Function:TabExpansion
 
 $module = $MyInvocation.MyCommand.ScriptBlock.Module 
 $module.OnRemove = {
