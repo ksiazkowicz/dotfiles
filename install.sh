@@ -1,6 +1,6 @@
 #!/bin/sh
 # check which OS we're running on first
-os=`uname -o`
+os=`uname -s`
 vimrc=$HOME/.vimrc
 
 if [ $os = "Haiku" ]; then
@@ -31,6 +31,11 @@ if [ $os = "Haiku" ]; then
     bashrc_dest=$HOME/config/settings/profile
 fi
 
+if [ $os = "Darwin" ]; then
+    bashrc_path=$PWD/.bash_profile
+    bashrc_dest=$PWD/.bash_profile
+fi
+
 if [ -f $bashrc_dest ]; then
     rm -f $bashrc_dest
 fi
@@ -43,8 +48,11 @@ ln -s $PWD/.gitconfig ~/.gitconfig
 
 if [ $os != "Haiku" ]; then
     # lunix vscode config
-    ln -s $PWD/vscode/settings.json ~/.config/Code/User/settings.json
-    ln -s $PWD/vscode/keybindings.json ~/.config/Code/User/keybindings.json
+    if [ $os == "Darwin"]; then
+        ln -s $PWD/vscode/ '~/Library/Application Support/Code/User/'
+    else
+        ln -s $PWD/vscode/ ~/.config/Code/User/
+    fi
 
     # lunix posh config
     if [ -d ~/.config/powershell ]; then

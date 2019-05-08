@@ -1,2 +1,5 @@
 .vim/autoload/plug.vim
 .vim/plugged
+vscode/globalStorage
+vscode/workspaceStorage
+.DS_Store
