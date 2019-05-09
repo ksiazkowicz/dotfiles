@@ -27,9 +27,13 @@ function prompt {
     $script:first = $true;
 
     Write-PromptStatus
-    Write-PromptVirtualEnv
+    if (Get-Module -ListAvailable -Name VirtualEnvWrapper) {
+        Write-PromptVirtualEnv
+    }
     Write-PromptDir
-    Write-PromptGit
+    if (Get-Module -ListAvailable -Name posh-git) {
+        Write-PromptGit
+    }
     Write-PromptDockerMachine
 
     Write-PromptFancyEnd

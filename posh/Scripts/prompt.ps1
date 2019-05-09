@@ -101,6 +101,28 @@ function Write-PromptDir {
 # Depends on posh-git
 function Write-PromptGit {
     if(Get-GitDirectory) {
-        Write-PromptSegment "  $(Get-GitBranch) " Black Magenta
+        $GitStatus = Get-GitStatus
+        $BranchStatus = ''
+        if ($GitStatus.UpstreamGone) {
+            $BranchStatus = '×'
+        } else {
+            if ($GitStatus.AheadBy -eq 0 -and $GitStatus.BehindBy -eq 0) {
+                $BranchStatus = '≡'
+            } else {
+                if ($GitStatus.AheadBy -gt 0 -and $GitStatus.BehindBy -eq 0) {
+                    $BranchStatus = "↑$($GitStatus.AheadBy)"
+                } else {
+                    if ($GitStatus.AheadBy -eq 0 -and $GitStatus.BehindBy -gt 0) {
+                        $BranchStatus = "↓$($GitStatus.BehindBy)"
+                    } else {
+                        if ($GitStatus.AheadBy -gt 0 -and $GitStatus.BehindBy -gt 0) {
+                            $BranchStatus = "$($GitStatus.AheadBy)↕$($GitStatus.BehindBy)"
+                        }
+                    }
+                }
+            }
+        }
+        
+        Write-PromptSegment "  $($GitStatus.Branch) $($BranchStatus) " Black Magenta
     }
 }

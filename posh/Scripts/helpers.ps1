@@ -63,6 +63,10 @@ function Generate-DjangoSecretKey {
     python manage.py shell -c "from django.core.management import utils; print(utils.get_random_secret_key())"
 }
 
+function grep-kill {
+    kill $(ps aux | grep $args | awk '{print $2}') -Force 2> /dev/null
+}
+
 function Fix-RecycleBin
 {
     Remove-Item -r -Force C:\`$Recycle.bin
