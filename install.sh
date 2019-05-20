@@ -33,7 +33,7 @@ fi
 
 if [ $os = "Darwin" ]; then
     bashrc_path=$PWD/.bash_profile
-    bashrc_dest=$PWD/.bash_profile
+    bashrc_dest=$HOME/.bash_profile
 fi
 
 if [ -f $bashrc_dest ]; then

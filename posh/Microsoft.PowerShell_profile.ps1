@@ -11,6 +11,7 @@ $env:SCRIPTS_PATH = (get-item $profile).Directory
 . "$env:SCRIPTS_PATH\Scripts\prompt.ps1"
 . "$env:SCRIPTS_PATH\Scripts\helpers.ps1"
 Import-Module posh-git
+Import-Module PSBashCompletions
 
 function Switch-DefaultPython {}
 
@@ -20,6 +21,21 @@ if (Get-Command python -errorAction SilentlyContinue) {
 
 # aliases
 New-Alias which get-command
+New-Alias k kubectl
+New-Alias kx kubectx
+New-Alias kn kubens
+New-Alias kl stern
+
+# completions
+$COMPLETIONS = "$env:SCRIPTS_PATH\Completions"
+Register-BashArgumentCompleter "kubectl" "$COMPLETIONS\kubectl.sh"
+Register-BashArgumentCompleter "kubectx" "$COMPLETIONS\kubectx.sh"
+Register-BashArgumentCompleter "kubens" "$COMPLETIONS\kubens.sh"
+Register-BashArgumentCompleter "stern" "$COMPLETIONS\stern.sh"
+Register-BashArgumentCompleter "k" "$COMPLETIONS\kubectl.sh"
+Register-BashArgumentCompleter "kx" "$COMPLETIONS\kubectx.sh"
+Register-BashArgumentCompleter "kn" "$COMPLETIONS\kubens.sh"
+Register-BashArgumentCompleter "kl" "$COMPLETIONS\stern.sh"
 
 # prompt
 function prompt {
