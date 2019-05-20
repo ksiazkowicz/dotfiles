@@ -28,9 +28,9 @@ function docker-env {
     }
 }
 
-if (Get-Command docker-compose -errorAction SilentlyContinue) {
-    $old_dc = get-command docker-compose
-    New-Alias docker-compose-old $old_dc
+$oldDockerCompose = Get-Command docker-compose -errorAction SilentlyContinue
+if ($oldDockerCompose) {
+    New-Alias -Name "docker-compose-old" $oldDockerCompose.Source
 }
 
 function docker-compose {
