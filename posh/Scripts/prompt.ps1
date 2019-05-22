@@ -98,6 +98,12 @@ function Write-PromptDir {
     Write-PromptSegment " $(Get-FancyDir) " Black DarkCyan
 }
 
+function Write-PromptK8s {
+    $Context = kubectl config current-context;
+    $Namespace = kubectl config view --minify --output 'jsonpath={..namespace}'
+    Write-PromptSegment " ⎈ $($Context):$($Namespace) " Black Blue
+}
+
 # Depends on posh-git
 function Write-PromptGit {
     if(Get-GitDirectory) {

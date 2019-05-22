@@ -28,10 +28,17 @@ function docker-env {
     }
 }
 
-$oldDockerCompose = Get-Command docker-compose -errorAction SilentlyContinue
-if ($oldDockerCompose) {
-    New-Alias -Name "docker-compose-old" $oldDockerCompose.Source
+if (Test-Path alias:docker-compose-old) {
+    if (Test-Path function:docker-compose) {
+        Remove-Item function:docker-compose
+    }
+    Remove-Alias docker-compose-old
+    $oldDockerCompose = Get-Command docker-compose -errorAction SilentlyContinue
+    if ($oldDockerCompose) {
+        New-Alias -Name "docker-compose-old" $oldDockerCompose.Source
+    }
 }
+
 
 function docker-compose {
     reset-encoding

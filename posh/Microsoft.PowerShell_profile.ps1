@@ -19,12 +19,23 @@ if (Get-Command python -errorAction SilentlyContinue) {
     Import-Module VirtualEnvWrapper
 }
 
+function Replace-Alias {
+    param(
+        [Parameter(Position=0)][string] $Command,
+        [Parameter(Position=1)][string] $Alias
+    )
+    if (Test-Path alias:$Alias) {
+        Remove-Alias $Alias
+    }
+    New-Alias $Alias $Command
+}
+
 # aliases
-New-Alias which get-command
-New-Alias k kubectl
-New-Alias kx kubectx
-New-Alias kn kubens
-New-Alias kl stern
+Replace-Alias which get-command
+Replace-Alias k kubectl
+Replace-Alias kx kubectx
+Replace-Alias kn kubens
+Replace-Alias kl stern
 
 # completions
 $COMPLETIONS = "$env:SCRIPTS_PATH\Completions"
@@ -43,10 +54,13 @@ function prompt {
     $script:first = $true;
 
     Write-PromptStatus
+    Write-PromptDir
     if (Get-Module -ListAvailable -Name VirtualEnvWrapper) {
         Write-PromptVirtualEnv
     }
-    Write-PromptDir
+    if (Get-Command kubectl) {
+        Write-PromptK8s
+    }
     if (Get-Module -ListAvailable -Name posh-git) {
         Write-PromptGit
     }
