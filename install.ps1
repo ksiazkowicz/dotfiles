@@ -30,3 +30,4 @@ New-Item -Type SymbolicLink -Path ~/AppData/Roaming/Code/User/keybindings.json -
 Install-Module posh-git
 Install-Module windows-screenfetch
 Install-Module PSBashCompletions
+Install-Module DockerCompletion

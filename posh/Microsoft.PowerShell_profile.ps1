@@ -12,6 +12,7 @@ $env:SCRIPTS_PATH = (get-item $profile).Directory
 . "$env:SCRIPTS_PATH\Scripts\helpers.ps1"
 Import-Module posh-git
 Import-Module PSBashCompletions
+Import-Module DockerCompletion
 
 function Switch-DefaultPython {}
 
@@ -19,23 +20,12 @@ if (Get-Command python -errorAction SilentlyContinue) {
     Import-Module VirtualEnvWrapper
 }
 
-function Replace-Alias {
-    param(
-        [Parameter(Position=0)][string] $Command,
-        [Parameter(Position=1)][string] $Alias
-    )
-    if (Test-Path alias:$Alias) {
-        Remove-Alias $Alias
-    }
-    New-Alias $Alias $Command
-}
-
 # aliases
-Replace-Alias which get-command
-Replace-Alias k kubectl
-Replace-Alias kx kubectx
-Replace-Alias kn kubens
-Replace-Alias kl stern
+New-Alias which get-command
+New-Alias k kubectl
+New-Alias kx kubectx
+New-Alias kn kubens
+New-Alias kl stern
 
 # completions
 $COMPLETIONS = "$env:SCRIPTS_PATH\Completions"
