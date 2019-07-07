@@ -3,3 +3,7 @@
 vscode/globalStorage
 vscode/workspaceStorage
 .DS_Store
+posh/Modules/posh-git
+posh/Modules/Watch
+posh/Modules/PSBashCompletions
+posh/Modules/DockerCompletion
