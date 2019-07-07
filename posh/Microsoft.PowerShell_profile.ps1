@@ -20,6 +20,9 @@ if (Get-Command python -errorAction SilentlyContinue) {
     Import-Module VirtualEnvWrapper
 }
 
+# key bindings
+Set-PSReadlineKeyHandler -Chord Alt+Backspace -Function BackwardKillWord
+
 # aliases
 New-Alias which get-command
 New-Alias k kubectl
@@ -62,39 +65,13 @@ function prompt {
     return ' ';
 }
 
-function Assume-Role {
-    param([string]$Role)
-    aws-vault exec $Role -- pwsh -NoLogo
-}
-
-# Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
-}
-
-function Invoke-BatchFile
-{
-    param([string]$Path, [string]$Parameters)
-
-    $tempFile = [IO.Path]::GetTempFileName()
-
-    ## Store the output of cmd.exe.  We also ask cmd.exe to output
-    ## the environment table after the batch file completes
-    cmd.exe /c " `"$Path`" $Parameters && set > `"$tempFile`" "
-
-    ## Go through the environment variables in the temp file.
-    ## For each of them, set the variable in our local environment.
-    Get-Content $tempFile | Foreach-Object {
-        if ($_ -match "^(.*?)=(.*)$")
-        {
-            Set-Content "env:\$($matches[1])" $matches[2]
-        }
+if ($PSVersionTable.Platform -like "Win32NT") {
+    # Chocolatey profile
+    $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+    if (Test-Path($ChocolateyProfile)) {
+        Import-Module "$ChocolateyProfile"
     }
-
-    Remove-Item $tempFile
 }
-
 
 if ($PSVersionTable.Platform -like "unix") {
     # venv on lunix

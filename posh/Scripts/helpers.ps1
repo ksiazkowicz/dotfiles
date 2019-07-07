@@ -71,7 +71,12 @@ function Generate-DjangoSecretKey {
 }
 
 function grep-kill {
-    kill $(ps aux | grep $args | awk '{print $2}') -Force 2> /dev/null
+    if ($PSVersionTable.Platform -like "Win32NT") {
+        $process = "*$($args -join '*')*"
+        kill -Id $(Get-CimInstance Win32_Process | Where-Object {$_.CommandLine -like $process}).ProcessId -Force 2> /dev/null
+    } else {
+        kill $(ps aux | grep $args | awk '{print $2}') -Force 2> /dev/null
+    }
 }
 
 function Fix-RecycleBin
@@ -83,4 +88,34 @@ function Sync-SSH
 {
     cp -R /mnt/c/Users/$env:UserName/.ssh ~/
     chmod 700 ~/.ssh/*
+}
+
+function Assume-Role {
+    param([string]$Role)
+    aws-vault exec $Role -- pwsh -NoLogo
+}
+
+
+if ($PSVersionTable.Platform -like "Win32NT") {
+    function Invoke-BatchFile
+    {
+        param([string]$Path, [string]$Parameters)
+
+        $tempFile = [IO.Path]::GetTempFileName()
+
+        ## Store the output of cmd.exe.  We also ask cmd.exe to output
+        ## the environment table after the batch file completes
+        cmd.exe /c " `"$Path`" $Parameters && set > `"$tempFile`" "
+
+        ## Go through the environment variables in the temp file.
+        ## For each of them, set the variable in our local environment.
+        Get-Content $tempFile | Foreach-Object {
+            if ($_ -match "^(.*?)=(.*)$")
+            {
+                Set-Content "env:\$($matches[1])" $matches[2]
+            }
+        }
+
+        Remove-Item $tempFile
+    }
 }
