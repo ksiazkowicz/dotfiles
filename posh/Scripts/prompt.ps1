@@ -82,6 +82,12 @@ function Write-PromptStatus {
     }
 }
 
+function Write-PromptAWSVault {
+    if ($env:AWS_VAULT) {
+        Write-PromptSegment " 🔐 $env:AWS_VAULT " Black Red
+    }
+}
+
 function Write-PromptVirtualEnv {
     if($env:VIRTUAL_ENV) {
         Write-PromptSegment " $(split-path $env:VIRTUAL_ENV -leaf) " Black Yellow
