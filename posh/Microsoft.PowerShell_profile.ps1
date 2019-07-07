@@ -51,6 +51,7 @@ function prompt {
     if (Get-Command kubectl) {
         Write-PromptK8s
     }
+    Write-PromptAWSVault
     if (Get-Module -ListAvailable -Name posh-git) {
         Write-PromptGit
     }
@@ -59,6 +60,11 @@ function prompt {
     Write-PromptFancyEnd
 
     return ' ';
+}
+
+function Assume-Role {
+    param([string]$Role)
+    aws-vault exec $Role -- pwsh -NoLogo
 }
 
 # Chocolatey profile
