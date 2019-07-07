@@ -101,7 +101,9 @@ function Write-PromptDir {
 function Write-PromptK8s {
     $Context = kubectl config current-context;
     $Namespace = kubectl config view --minify --output 'jsonpath={..namespace}'
-    Write-PromptSegment " ⎈ $($Context):$($Namespace) " Black Blue
+    if ($Context -And $Namespace) {
+        Write-PromptSegment " ⎈ $($Context):$($Namespace) " Black Blue
+    }
 }
 
 # Depends on posh-git
