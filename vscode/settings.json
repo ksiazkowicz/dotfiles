@@ -33,7 +33,10 @@
   // Terminal
   "terminal.integrated.fontFamily": "Source Code Variable",
   "terminal.integrated.windowsEnableConpty": true,
-  "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\6\\pwsh.exe",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.0.0.3_neutral__8wekyb3d8bbwe\\pwsh.exe",
+  "terminal.integrated.shellArgs.windows": [
+    "--nologo"
+  ],
   "terminal.integrated.shell.osx": "/usr/local/bin/pwsh",
   "terminal.integrated.shellArgs.osx": [
     "--nologo"
@@ -52,5 +55,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "terminal.integrated.shell.linux": "/usr/bin/zsh"
 }
