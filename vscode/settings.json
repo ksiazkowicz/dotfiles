@@ -2,7 +2,6 @@
   "editor.fontFamily": "Source Code Variable, Consolas, 'Courier New', monospace",
   "git.autofetch": true,
   "python.venvPath": "~/Envs",
-  "workbench.statusBar.feedback.visible": false,
   "diffEditor.ignoreTrimWhitespace": false,
   "files.eol": "\n",
   "breadcrumbs.enabled": true,
@@ -52,5 +51,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+  "atlascode.jira.workingSite": {
+    "baseUrlSuffix": "atlassian.net"
+  },
+  "yaml.schemas": {
+    "file:///Users/maciejjaniszewski/.vscode/extensions/atlassian.atlascode-1.4.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  }
 }

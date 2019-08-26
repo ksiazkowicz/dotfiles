@@ -23,3 +23,8 @@ export PROJECT_HOME=$HOME/devel
 export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 source /usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/virtualenvwrapper.sh
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
