@@ -1,5 +1,30 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Setting PATH for Python 3.7
+export PATH="/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
+
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# virtualenvwrapper
+export WORKON_HOME=$HOME/Envs
+export PROJECT_HOME=$HOME/devel
+export VIRTUALENVWRAPPER_PYTHON=$(which python3)
+source /usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/virtualenvwrapper.sh
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# pyenv
+if (( $+commands[pyenv] )); then
+  export PATH="/home/janis/.pyenv/bin:$PATH"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -72,6 +97,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(
     git docker docker-compose docker-machine ksiazkowicz-helpers
     zsh-syntax-highlighting virtualenvwrapper kubectl node npm history
+    brew
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -110,11 +136,13 @@ alias kx="kubectx"
 alias kn="kubens"
 alias kl="stern"
 
-# pyenv
-export PATH="/home/janis/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# Completions
+export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
+source /usr/local/etc/profile.d/bash_completion.sh
+
 
 # custom completions
 fpath=(~/.oh-my-zsh/custom/completions $fpath)
 autoload -Uz compinit && compinit -i
+
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion

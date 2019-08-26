@@ -36,10 +36,7 @@
   "terminal.integrated.shellArgs.windows": [
     "--nologo"
   ],
-  "terminal.integrated.shell.osx": "/usr/local/bin/pwsh",
-  "terminal.integrated.shellArgs.osx": [
-    "--nologo"
-  ],
+  "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
