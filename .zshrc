@@ -117,7 +117,7 @@ export HISTFILE=~/.zhistory
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='code'
+  export EDITOR='vim'
 fi
 
 # Compilation flags
