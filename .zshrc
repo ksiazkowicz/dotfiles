@@ -1,11 +1,14 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH:~/Library/Android/sdk/platform-tools
 
 # Setting PATH for Python 3.7
 export PATH="/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# Poetry
+export PATH="$HOME/.poetry/bin:$PATH"
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/Envs
@@ -97,7 +100,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(
     git docker docker-compose docker-machine ksiazkowicz-helpers
     zsh-syntax-highlighting virtualenvwrapper kubectl node npm history
-    brew
+    brew zsh-aws-vault
 )
 
 source $ZSH/oh-my-zsh.sh

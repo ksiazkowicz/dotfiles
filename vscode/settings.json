@@ -38,7 +38,7 @@
   ],
   "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "files.exclude": {
     "**/.git": true,
@@ -57,6 +57,5 @@
   "yaml.schemas": {
     "file:///Users/maciejjaniszewski/.vscode/extensions/atlassian.atlascode-1.4.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "terminal.integrated.shell.linux": "/usr/bin/zsh"
 }

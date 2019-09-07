@@ -175,9 +175,9 @@ prompt_aws() {
 prompt_k8s() {
   (( $+commands[kubectl] )) || return
   K8S_CONTEXT=`kubectl config current-context`
-  K8S_NAMESPACE=`kubectl config view --minify --output 'jsonpath={..namespace}'`
-  [[ -z "$K8S_CONTEXT" || -z "$K8S_NAMESPACE" ]] && return
-  prompt_segment 12 "⎈ $K8S_CONTEXT:$K8S_NAMESPACE"
+  K8S_NAMESPACE=`kubectl config view --minify --output 'jsonpath={..namespace}'` 2> /dev/null
+  [[ -z "$K8S_CONTEXT" ]] && return
+  prompt_segment 12 "⎈ $K8S_CONTEXT:${K8S_NAMESPACE:-default}"
 }
 
 prompt_awsvault() {
@@ -186,8 +186,9 @@ prompt_awsvault() {
 }
 
 prompt_docker() {
-  [[ -z "$DOCKER_MACHINE_NAME" ]] && return
-  prompt_segment 12 "$DOCKER_MACHINE_NAME"
+  local DOCKER_MACHINE=${DOCKER_MACHINE_NAME:-$DOCKER_HOST}
+  [[ -z $DOCKER_HOST ]] && return
+  prompt_segment 12 "$DOCKER_MACHINE"
 }
 
 ## Main prompt
