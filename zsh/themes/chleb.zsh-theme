@@ -174,7 +174,7 @@ prompt_aws() {
 # K8s context and namespace
 prompt_k8s() {
   (( $+commands[kubectl] )) || return
-  K8S_CONTEXT=`kubectl config current-context`
+  K8S_CONTEXT=`kubectl config current-context` 2> /dev/null
   K8S_NAMESPACE=`kubectl config view --minify --output 'jsonpath={..namespace}'` 2> /dev/null
   [[ -z "$K8S_CONTEXT" ]] && return
   prompt_segment 12 "⎈ $K8S_CONTEXT:${K8S_NAMESPACE:-default}"
