@@ -1,32 +1,44 @@
+os=`uname -s`
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH:~/Library/Android/sdk/platform-tools
 
-# Setting PATH for Python 3.7
-export PATH="/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
+# Mac specific stuff
+if [ $os = "Darwin" ]; then
+  # Setting PATH for Python 3.7
+  export PATH="/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 
-# Add Visual Studio Code (code)
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+  # Add Visual Studio Code (code)
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+else
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) 
+fi
 
 # Poetry
 export PATH="$HOME/.poetry/bin:$PATH"
 
 # virtualenvwrapper
-export WORKON_HOME=$HOME/Envs
-export PROJECT_HOME=$HOME/devel
-export VIRTUALENVWRAPPER_PYTHON=$(which python3)
-source /usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/virtualenvwrapper.sh
+virtualenvwrapper_path=$(which virtualenvwrapper.sh)
+if [ -s $virtualenvwrapper_path ]; then
+  export WORKON_HOME=$HOME/Envs
+  export PROJECT_HOME=$HOME/Development
+  export VIRTUALENVWRAPPER_PYTHON=$(which python3)
+  . $virtualenvwrapper_path
+  export VIRTUAL_ENV_DISABLE_PROMPT=1
+fi
+
 export PATH="/usr/local/opt/openssl/bin:$PATH"
-export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # pyenv
 if (( $+commands[pyenv] )); then
-  export PATH="/home/janis/.pyenv/bin:$PATH"
+  export PATH="$HOME/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 
 # Path to your oh-my-zsh installation.
@@ -141,7 +153,7 @@ alias kl="stern"
 
 # Completions
 export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
-source /usr/local/etc/profile.d/bash_completion.sh
+[ -s "/usr/local/etc/profile.d/bash_completion.sh" ] && . /usr/local/etc/profile.d/bash_completion.sh
 
 
 # custom completions
