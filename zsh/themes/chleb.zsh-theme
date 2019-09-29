@@ -12,11 +12,8 @@ CURRENT_FG='NONE'
 prompt_segment() {
   local fg
   [[ -n $1 ]] && fg="%F{$1}" || fg="%f"
-  if [[ $CURRENT_FG != 'NONE' && $1 != $CURRENT_FG ]]; then
-    echo -n " %{$fg%F{$CURRENT_FG}%}$SEGMENT_SEPARATOR%{$fg%} "
-  else
-    echo -n "%{$fg%}"
-  fi
+  [[ $CURRENT_FG != 'NONE' ]] && echo -n " %{$fg%F{$CURRENT_FG}%}$SEGMENT_SEPARATOR"
+  echo -n "%{$fg%} "
 
   CURRENT_FG=$1
   [[ -n $2 ]] && echo -n $2
@@ -24,11 +21,7 @@ prompt_segment() {
 
 # End the prompt, closing any open segments
 prompt_end() {
-  if [[ -n $CURRENT_FG ]]; then
-    echo -n " %{%k%F{$CURRENT_FG}%}$SEGMENT_SEPARATOR"
-  else
-    echo -n "%{%k%}"
-  fi
+  [[ -n $CURRENT_FG ]] && echo -n " %{%k%F{$CURRENT_FG}%}$SEGMENT_SEPARATOR"
   echo -n "%{%f%}"
   CURRENT_FG=''
 }
@@ -39,9 +32,6 @@ prompt_end() {
 # Git: branch/detached head, dirty status
 prompt_git() {
   (( $+commands[git] )) || return
-  if [[ "$(git config --get oh-my-zsh.hide-status 2>/dev/null)" = 1 ]]; then
-    return
-  fi
   local PL_BRANCH_CHAR
   () {
     local LC_ALL="" LC_CTYPE="en_US.UTF-8"
@@ -82,63 +72,6 @@ prompt_git() {
   fi
 }
 
-prompt_bzr() {
-    (( $+commands[bzr] )) || return
-    if (bzr status >/dev/null 2>&1); then
-        status_mod=`bzr status | head -n1 | grep "modified" | wc -m`
-        status_all=`bzr status | head -n1 | wc -m`
-        revision=`bzr log | head -n2 | tail -n1 | sed 's/^revno: //'`
-        if [[ $status_mod -gt 0 ]] ; then
-            prompt_segment 11
-            echo -n "bzr@"$revision "✚ "
-        else
-            if [[ $status_all -gt 0 ]] ; then
-                prompt_segment 11
-                echo -n "bzr@"$revision
-            else
-                prompt_segment 10
-                echo -n "bzr@"$revision
-            fi
-        fi
-    fi
-}
-
-prompt_hg() {
-  (( $+commands[hg] )) || return
-  local rev st branch
-  if $(hg id >/dev/null 2>&1); then
-    if $(hg prompt >/dev/null 2>&1); then
-      if [[ $(hg prompt "{status|unknown}") = "?" ]]; then
-        # if files are not added
-        prompt_segment 9
-        st='±'
-      elif [[ -n $(hg prompt "{status|modified}") ]]; then
-        # if any modification
-        prompt_segment 11
-        st='±'
-      else
-        # if working copy is clean
-        prompt_segment 10
-      fi
-      echo -n $(hg prompt "☿ {rev}@{branch}") $st
-    else
-      st=""
-      rev=$(hg id -n 2>/dev/null | sed 's/[^-0-9]//g')
-      branch=$(hg id -b 2>/dev/null)
-      if `hg st | grep -q "^\?"`; then
-        prompt_segment 9
-        st='±'
-      elif `hg st | grep -q "^[MA]"`; then
-        prompt_segment 11
-        st='±'
-      else
-        prompt_segment 10
-      fi
-      echo -n "☿ $rev@$branch" $st
-    fi
-  fi
-}
-
 # Dir: current working directory
 prompt_dir() {
   local CWD="${PWD#?}"
@@ -160,15 +93,10 @@ prompt_virtualenv() {
 
 prompt_status() {
   if [[ $RETVAL -ne 0 ]]; then
-    prompt_segment 9 " ✖  $RETVAL"
+    prompt_segment 9 "✖ "
   else
-    prompt_segment 10 " ✔ "
+    prompt_segment 10 "✔ "
   fi
-}
-
-prompt_aws() {
-  [[ -z "$AWS_PROFILE" ]] && return
-  prompt_segment 9 "AWS: $AWS_PROFILE"
 }
 
 # K8s context and namespace
@@ -181,13 +109,12 @@ prompt_k8s() {
 }
 
 prompt_awsvault() {
-  [[ -z "$AWS_VAULT" ]] && return
-  prompt_segment 9 "🔐  $AWS_VAULT"
+  [[ -z "$AWS_VAULT" ]] || prompt_segment 9 "🔐  $AWS_VAULT"
 }
 
 prompt_docker() {
   local DOCKER_MACHINE=${DOCKER_MACHINE_NAME:-$DOCKER_HOST}
-  [[ -z $DOCKER_HOST ]] && return
+  [[ -z $DOCKER_HOST || $DOCKER_HOST == tcp://localhost* ]] && return
   prompt_segment 12 "$DOCKER_MACHINE"
 }
 
@@ -198,11 +125,8 @@ build_prompt() {
   prompt_dir
   prompt_virtualenv
   prompt_k8s
-  prompt_aws
   prompt_awsvault
   prompt_git
-  prompt_bzr
-  prompt_hg
   prompt_docker
   prompt_end
 }
