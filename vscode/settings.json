@@ -57,5 +57,18 @@
   "yaml.schemas": {
     "file:///Users/maciejjaniszewski/.vscode/extensions/atlassian.atlascode-1.4.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
-  "terminal.integrated.shell.linux": "/usr/bin/zsh"
+  "terminal.integrated.shell.linux": "/usr/bin/zsh",
+  "terraform.indexing": {
+    "enabled": false,
+    "liveIndexing": false,
+    "delay": 500,
+    "exclude": [
+      ".terraform/**/*",
+      "**/.terraform/**/*"
+    ]
+  },
+  "terraform.languageServer": {
+    "enabled": true,
+    "args": []
+  }
 }
