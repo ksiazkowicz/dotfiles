@@ -3,6 +3,7 @@ os=`uname -s`
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export GOPATH=$HOME/go
+ZSH_CUSTOM=$HOME/Development/dotfiles/zsh
 
 # Mac specific stuff
 if [ $os = 'Darwin' ]; then
@@ -15,6 +16,10 @@ if [ $os = 'Darwin' ]; then
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 else
   [ -s "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) 
+  # wsl specific stuff
+  if [[ -d /c/Windows ]]; then
+    export DOCKER_HOST=tcp://localhost:2375
+  fi
 fi
 
 # Poetry
@@ -41,8 +46,8 @@ if (( $+commands[virtualenvwrapper.sh] )); then
 fi
 
 # pyenv
+export PATH="$HOME/.pyenv/bin:$PATH"
 if (( $+commands[pyenv] )); then
-  export PATH="$HOME/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi
@@ -88,7 +93,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -148,7 +153,7 @@ export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
 [ -s "/usr/local/etc/profile.d/bash_completion.sh" ] && . /usr/local/etc/profile.d/bash_completion.sh
 
 # custom completions
-fpath=(~/.oh-my-zsh/custom/completions $fpath)
+fpath=($ZSH_CUSTOM/completions $fpath)
 
 # lazyload kubectl completion
 function kubectl() {
@@ -212,3 +217,5 @@ _update_zcomp() {
 }
 _update_zcomp "$zcachedir"
 unfunction _update_zcomp
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
