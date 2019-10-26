@@ -2,6 +2,7 @@ os=`uname -s`
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+ZSH_CUSTOM=$HOME/Development/dotfiles/zsh
 
 # Mac specific stuff
 if [ $os = 'Darwin' ]; then
@@ -151,7 +152,7 @@ export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
 [ -s "/usr/local/etc/profile.d/bash_completion.sh" ] && . /usr/local/etc/profile.d/bash_completion.sh
 
 # custom completions
-fpath=(~/.oh-my-zsh/custom/completions $fpath)
+fpath=($ZSH_CUSTOM/completions $fpath)
 
 # lazyload kubectl completion
 function kubectl() {
@@ -215,3 +216,5 @@ _update_zcomp() {
 }
 _update_zcomp "$zcachedir"
 unfunction _update_zcomp
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

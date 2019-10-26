@@ -10,6 +10,3 @@ function grep-kill() {
     kill $(ps aux | grep $* | awk '{print $2}') -f 2> /dev/null
 }
 
-function Assume-Role() {
-    aws-vault exec $1 -- zsh
-}

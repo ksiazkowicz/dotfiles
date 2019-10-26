@@ -135,3 +135,5 @@ if [ -d /mnt/c/WINDOWS ]; then
 fi
 
 export PATH=$PATH:~/dotfiles/bash
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
