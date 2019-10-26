@@ -2,6 +2,7 @@ os=`uname -s`
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export GOPATH=$HOME/go
 
 # Mac specific stuff
 if [ $os = 'Darwin' ]; then
@@ -28,7 +29,7 @@ if (( $+commands[virtualenvwrapper.sh] )); then
   export VIRTUAL_ENV_DISABLE_PROMPT=1
 
   if [[ ! $(typeset -f workon) ]]; then
-    declare -a __virtualenv_commands=('workon' 'deactivate' 'mkvirtualenv')
+    declare -a __virtualenv_commands=('workon' 'mkvirtualenv')
     __load_virtualenv() {
       for i in "${__virtualenv_commands[@]}"; do unalias $i; done
       source "$(which virtualenvwrapper.sh)"
