@@ -1,7 +1,7 @@
 os=`uname -s`
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 export GOPATH=$HOME/go
 ZSH_CUSTOM=$HOME/Development/dotfiles/zsh
 
@@ -111,7 +111,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(
     git docker docker-compose docker-machine ksiazkowicz-helpers
     zsh-syntax-highlighting virtualenvwrapper node npm history
-    brew zsh-aws-vault
+    brew zsh-aws-vault zsh-kubectl-prompt
 )
 
 source $ZSH/oh-my-zsh.sh

@@ -4,3 +4,6 @@
 [submodule "zsh/plugins/zsh-aws-vault"]
 	path = zsh/plugins/zsh-aws-vault
 	url = git@github.com:blimmer/zsh-aws-vault.git
+[submodule "zsh/plugins/zsh-kubectl-prompt"]
+	path = zsh/plugins/zsh-kubectl-prompt
+	url = git@github.com:superbrothers/zsh-kubectl-prompt.git

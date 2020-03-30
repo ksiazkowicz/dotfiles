@@ -1,6 +1,8 @@
 # vim:ft=zsh ts=2 sw=2 sts=2
 CURRENT_FG='NONE'
 
+zstyle ':zsh-kubectl-prompt:' separator ':'
+
 # Special Powerline characters
 
 () {
@@ -32,44 +34,8 @@ prompt_end() {
 # Git: branch/detached head, dirty status
 prompt_git() {
   (( $+commands[git] )) || return
-  local PL_BRANCH_CHAR
-  () {
-    local LC_ALL="" LC_CTYPE="en_US.UTF-8"
-    PL_BRANCH_CHAR=$'\ue0a0'         # 
-  }
-  local ref dirty mode repo_path
-
-  if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-    repo_path=$(git rev-parse --git-dir 2>/dev/null)
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git rev-parse --short HEAD 2> /dev/null)"
-    prompt_segment 13
-
-    setopt promptsubst
-    autoload -Uz vcs_info
-
-    local STATUS=''
-
-    # is branch ahead?
-    if $(echo "$(git log origin/$(git_current_branch)..HEAD 2> /dev/null)" | grep '^commit' &> /dev/null); then
-      STATUS="$STATUS↑"
-    fi
-
-    # is branch behind?
-    if $(echo "$(git log HEAD..origin/$(git_current_branch) 2> /dev/null)" | grep '^commit' &> /dev/null); then
-      STATUS="$STATUS↓"
-    fi
-
-    [[ -z $STATUS ]] && STATUS='≡'
-
-    zstyle ':vcs_info:*' enable git
-    zstyle ':vcs_info:*' get-revision true
-    zstyle ':vcs_info:*' check-for-changes true
-    zstyle ':vcs_info:*' unstagedstr '● '
-    zstyle ':vcs_info:*' formats '%u%b'
-    zstyle ':vcs_info:*' actionformats '%u%b (%a)'
-    vcs_info
-    echo -n "$PL_BRANCH_CHAR ${vcs_info_msg_0_%%} $STATUS"
-  fi
+  local repo_info=$(git --no-optional-locks status --branch --porcelain=v2 2>&1 | gawk -f $ZSH_CUSTOM/themes/chleb-git.gawk)
+  [[ -z "$repo_info" ]] || prompt_segment 13 " $repo_info"
 }
 
 # Dir: current working directory
@@ -87,7 +53,7 @@ prompt_dir() {
 prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment 11 `basename $virtualenv_path`
+    prompt_segment 11 "🐍 ${basename $virtualenv_path}"
   fi
 }
 
@@ -101,11 +67,7 @@ prompt_status() {
 
 # K8s context and namespace
 prompt_k8s() {
-  (( $+commands[kubectl] )) || return
-  K8S_CONTEXT=`kubectl config current-context` 2> /dev/null
-  K8S_NAMESPACE=`kubectl config view --minify --output 'jsonpath={..namespace}'` 2> /dev/null
-  [[ -z "$K8S_CONTEXT" ]] && return
-  prompt_segment 12 "⎈ $K8S_CONTEXT:${K8S_NAMESPACE:-default}"
+  [[ -z "$ZSH_KUBECTL_PROMPT" ]] || prompt_segment 12 "⎈ $ZSH_KUBECTL_PROMPT"
 }
 
 prompt_awsvault() {
@@ -113,9 +75,8 @@ prompt_awsvault() {
 }
 
 prompt_docker() {
-  local DOCKER_MACHINE=${DOCKER_MACHINE_NAME:-$DOCKER_HOST}
   [[ -z $DOCKER_HOST || $DOCKER_HOST == tcp://localhost* ]] && return
-  prompt_segment 12 "$DOCKER_MACHINE"
+  prompt_segment 12 "🐋 ${DOCKER_MACHINE_NAME:-$DOCKER_HOST}"
 }
 
 ## Main prompt
