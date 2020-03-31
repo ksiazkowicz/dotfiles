@@ -34,27 +34,18 @@ prompt_end() {
 # Git: branch/detached head, dirty status
 prompt_git() {
   (( $+commands[git] )) || return
-  local repo_info=$(git --no-optional-locks status --branch --porcelain=v2 2>&1 | gawk -f $ZSH_CUSTOM/themes/chleb-git.gawk)
+  local repo_info=$(git --no-optional-locks status --branch --porcelain=v2 2>&1 | awk -f $ZSH_CUSTOM/themes/chleb-git.gawk)
   [[ -z "$repo_info" ]] || prompt_segment 13 " $repo_info"
 }
 
 # Dir: current working directory
 prompt_dir() {
-  local CWD="${PWD#?}"
-  [[ -z "$CWD" ]] && return
-
-  local SHORT_HOME="${HOME#?}"
-  CWD="${CWD/#$SHORT_HOME/~}"
-  CWD="$CWD:gs/\//  "
-  prompt_segment cyan $CWD
+  [[ -z "${PWD#?}" ]] || prompt_segment cyan "${${${PWD#?}/#${HOME#?}/~}:gs/\//  }"
 }
 
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
-  local virtualenv_path="$VIRTUAL_ENV"
-  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment 11 "🐍 ${basename $virtualenv_path}"
-  fi
+  [[ -n $VIRTUAL_ENV && -n $VIRTUAL_ENV_DISABLE_PROMPT ]] && prompt_segment 11 "🐍  $VIRTUAL_ENV:t"
 }
 
 prompt_status() {
@@ -75,8 +66,7 @@ prompt_awsvault() {
 }
 
 prompt_docker() {
-  [[ -z $DOCKER_HOST || $DOCKER_HOST == tcp://localhost* ]] && return
-  prompt_segment 12 "🐋 ${DOCKER_MACHINE_NAME:-$DOCKER_HOST}"
+  [[ -z $DOCKER_HOST || $DOCKER_HOST == tcp://localhost* ]] || prompt_segment 12 "🐋  ${DOCKER_MACHINE_NAME:-$DOCKER_HOST}"
 }
 
 ## Main prompt

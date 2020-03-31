@@ -2,7 +2,7 @@
   "editor.fontFamily": "Source Code Variable, Consolas, 'Courier New', monospace",
   "git.autofetch": true,
   "python.venvPath": "~/Envs",
-  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.ignoreTrimWhitespace": true,
   "files.eol": "\n",
   "breadcrumbs.enabled": true,
   "python.jediEnabled": false,
@@ -55,7 +55,7 @@
     "baseUrlSuffix": "atlassian.net"
   },
   "yaml.schemas": {
-    "file:///Users/maciejjaniszewski/.vscode/extensions/atlassian.atlascode-1.4.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/maciejjaniszewski/.vscode/extensions/atlassian.atlascode-2.4.9/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "terminal.integrated.shell.linux": "/usr/bin/zsh",
   "terraform.indexing": {
@@ -70,5 +70,52 @@
   "terraform.languageServer": {
     "enabled": true,
     "args": []
+  },
+  "update.mode": "manual",
+  "atlascode.jira.lastCreateSiteAndProject": {
+    "siteId": "empty",
+    "projectKey": ""
+  },
+  "editor.tokenColorCustomizations": {
+    "[Default Dark+]": {
+      "textMateRules": [
+        {
+        	"scope": "comment.typehint",
+        	"settings": {
+        		"foreground": "#d4d4d4"
+        	}
+        },
+        {
+        	"scope": "comment.typehint.directive",
+        	"settings": {
+          		"foreground": "#6A9955"
+        	}
+        },
+        {
+        	"scope": "comment.typehint.ignore",
+        	"settings": {
+        		"foreground": "#DCDCAA"
+        	}
+        },
+        {
+          "scope": "comment.typehint.punctuation",
+          "settings": {
+            "foreground": "#d4d4d4"
+          }
+        },
+        {
+          "scope": "comment.typehint.type.notation.python",
+          "settings": {
+            "foreground": "#569cd6"
+          }
+        },
+        {
+          "scope": "comment.typehint.variable.notation.python",
+          "settings": {
+            "foreground": "#d4d4d4"
+          }
+        }
+      ]
+    }
   }
 }
