@@ -58,7 +58,7 @@ prompt_status() {
 
 # K8s context and namespace
 prompt_k8s() {
-  [[ -z "$ZSH_KUBECTL_PROMPT" ]] || prompt_segment 12 "⎈ $ZSH_KUBECTL_PROMPT"
+  [[ -z "$ZSH_KUBECTL_PROMPT" || $ZSH_KUBECTL_PROMPT == "$HOME/.kube/config doesn't exist" || $ZSH_KUBECTL_PROMPT == "current-context is not set" ]] || prompt_segment 12 "⎈ $ZSH_KUBECTL_PROMPT"
 }
 
 prompt_awsvault() {
