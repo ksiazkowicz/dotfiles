@@ -50,9 +50,9 @@ prompt_virtualenv() {
 
 prompt_status() {
   if [[ $RETVAL -ne 0 ]]; then
-    prompt_segment 9 "✖ "
+    prompt_segment 9 "X"
   else
-    prompt_segment 10 "✔ "
+    prompt_segment 10 "✓"
   fi
 }
 
@@ -62,7 +62,7 @@ prompt_k8s() {
 }
 
 prompt_awsvault() {
-  [[ -z "$AWS_VAULT" ]] || prompt_segment 9 "🔐  $AWS_VAULT"
+  [[ -z "$AWS_VAULT" ]] || prompt_segment 9 " $AWS_VAULT"
 }
 
 prompt_docker() {

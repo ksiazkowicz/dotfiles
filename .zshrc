@@ -16,10 +16,6 @@ if [ $os = 'Darwin' ]; then
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 else
   [ -s "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) 
-  # wsl specific stuff
-  if [[ -d /c/Windows ]]; then
-    export DOCKER_HOST=tcp://localhost:2375
-  fi
 fi
 
 # Poetry
@@ -147,6 +143,10 @@ alias kn="kubens"
 alias kl="stern"
 
 [ -s "$HOME/.aliases.zsh" ] && source ~/.aliases.zsh
+
+# Dircolors
+eval $(dircolors ~/.dircolors)
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Completions
 export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d

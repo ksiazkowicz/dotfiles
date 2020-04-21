@@ -53,6 +53,7 @@ set colorcolumn=80,120
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tomasiser/vim-code-dark'
 Plug 'jreybert/vimagit'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'scrooloose/nerdtree'
@@ -72,12 +73,12 @@ endif
 " themes
 let g:airline_powerline_fonts = 1
 map <F7> mzgg=G`z
-let g:airline_theme="minimalist"
+let g:airline_theme="codedark"
 
 if g:windows && !has('gui_running') && $ConEmuANSI != "ON"
     colorscheme desert
 else
-    colorscheme darcula
+    colorscheme codedark
 endif 
 
 " keyboard mappings

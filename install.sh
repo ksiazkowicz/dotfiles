@@ -45,6 +45,7 @@ if [ -f ~/.gitconfig ]; then
     rm -f ~/.gitconfig
 fi
 ln -s $PWD/.gitconfig ~/.gitconfig
+ln -s $PWD/.dircolors ~/.dircolors
 
 if [ $os != "Haiku" ]; then
     # lunix vscode config
