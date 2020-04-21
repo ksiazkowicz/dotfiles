@@ -14,9 +14,14 @@ if [ $os = 'Darwin' ]; then
 
   # Add Visual Studio Code (code)
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+  eval $(gdircolors ~/.dircolors)
 else
-  [ -s "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv) 
+  [ -s "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  # Dircolors
+  eval $(dircolors ~/.dircolors)
 fi
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Poetry
 export PATH="$HOME/.poetry/bin:$PATH"
@@ -143,10 +148,6 @@ alias kn="kubens"
 alias kl="stern"
 
 [ -s "$HOME/.aliases.zsh" ] && source ~/.aliases.zsh
-
-# Dircolors
-eval $(dircolors ~/.dircolors)
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Completions
 export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
