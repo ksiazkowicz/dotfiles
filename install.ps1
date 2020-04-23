@@ -25,7 +25,7 @@ New-Item -Type SymbolicLink -Path ~/.gitattributes -Value $(Join-Path $PSScriptR
 New-Item -Type SymbolicLink -Path ~/AppData/Roaming/ConEmu.xml -Value $(Join-Path $PSScriptRoot ConEmu.xml)
 New-Item -Type SymbolicLink -Path ~/AppData/Roaming/Code/User/settings.json -Value $(Join-Path $PSScriptRoot vscode/settings.json)
 New-Item -Type SymbolicLink -Path ~/AppData/Roaming/Code/User/keybindings.json -Value $(Join-Path $PSScriptRoot vscode/keybindings.json)
-New-Item -Type SymbolicLink -Path ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/profiles.json -Value $(Join-Path $PSScriptRoot WindowsTerminal/profiles.json)
+New-Item -Type SymbolicLink -Path ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json -Value $(Join-Path $PSScriptRoot WindowsTerminal/settings.json)
 
 # posh modules
 Install-Module posh-git
